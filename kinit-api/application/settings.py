@@ -11,10 +11,10 @@ from fastapi.security import OAuth2PasswordBearer
 """
 系统版本
 """
-VERSION = "3.10.1"
+VERSION = "3.10.2"
 
 """安全警告: 不要在生产中打开调试运行!"""
-DEBUG = True
+DEBUG = False
 
 """是否开启演示功能：取消所有POST,DELETE,PUT操作权限"""
 DEMO = True

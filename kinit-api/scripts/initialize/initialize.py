@@ -1,11 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-# @version        : 1.0
-# @Create Time    : 2022/11/23 11:21 
-# @File           : initialize.py
-# @IDE            : PyCharm
-# @desc           : 简要说明
-
 from enum import Enum
 from sqlalchemy import insert
 from core.database import db_getter

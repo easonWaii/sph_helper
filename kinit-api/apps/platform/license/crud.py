@@ -6,6 +6,7 @@ from core.crud import DalBase
 from . import models, schemas
 from . import params
 from .utils.auth_license import decode_license
+import ctypes
 
 
 class VLicenseDal(DalBase):
@@ -18,10 +19,10 @@ class VLicenseDal(DalBase):
 
     async def verify_license_and_store(self, license_obj: schemas.VLicense) -> Dict[str, Any]:
         try:
-            decoded_device_id, expire_time = decode_license(license_obj.license_key)
-            if license_obj.device_id != decoded_device_id:
+            status_code = decode_license(license_obj.device_id, license_obj.license_key)
+            if status_code == -1:
                 return {"status": -1, "message": "授权码与设备不匹配"}
-            if datetime.now().timestamp() > expire_time:
+            elif status_code == 0:
                 return {"status": -1, "message": "授权过期"}
 
             # 检查数据库中是否已有该设备ID，有就更新，没有就新增
@@ -31,8 +32,8 @@ class VLicenseDal(DalBase):
                 await self.flush(db_license)
             else:
                 await self.create_data(license_obj)
-            expire_datetime = datetime.fromtimestamp(expire_time)
-            return {"status": 0, "message": "授权码有效，有效期至" + expire_datetime.strftime('%Y-%m-%d')}
+
+            return {"status": 0, "message": "授权码有效"}
         except Exception as e:
             return {"status": -1, "message": str(e)}
 
