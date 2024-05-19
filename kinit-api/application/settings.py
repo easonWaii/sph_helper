@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-# @version        : 1.0
-# @Create Time    : 2021/10/19 15:47
-# @File           : settings.py
-# @IDE            : PyCharm
-# @desc           : 主配置文件
 
 import os
 from fastapi.security import OAuth2PasswordBearer
@@ -122,7 +116,7 @@ DEFAULT_PASSWORD = "0"
 # 默认头像
 DEFAULT_AVATAR = "https://vv-reserve.oss-cn-hangzhou.aliyuncs.com/avatar/2023-01-27/1674820804e81e7631.png"
 # 默认登陆时最大输入密码或验证码错误次数
-DEFAULT_AUTH_ERROR_MAX_NUMBER = 5
+DEFAULT_AUTH_ERROR_MAX_NUMBER = 10
 # 是否开启保存登录日志
 LOGIN_LOG_RECORD = True
 # 是否开启保存每次请求日志到本地

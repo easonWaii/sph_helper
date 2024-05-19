@@ -8,13 +8,10 @@ from httpx import RequestError
 from motor.core import AgnosticDatabase
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from redis.asyncio.client import Redis
-from datetime import datetime
 from apps.platform.baseinfo.crud import PlatformCookieDal
-from apps.platform.baseinfo.schemas import PlatformCookie
 from request.base_request import AbstractClient
 from utils.request_util import get_user_agent
-from application.request_config import wx_sph
+from apps.platform.baseinfo.request_config import wx_sph
 from utils.tools import get_datetime_timestamp, filter_dict_optimized
 
 

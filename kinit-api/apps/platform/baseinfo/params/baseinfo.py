@@ -1,4 +1,4 @@
-from fastapi import Depends, Query
+from fastapi import Depends, Query, Body
 from core.dependencies import Paging, QueryParams
 
 
@@ -9,8 +9,8 @@ class BaseInfoParams(QueryParams):
 
     def __init__(
             self,
-            session_id: str | None = Query(None, title="会话ID"),
-            platform_name: str | None = Query(None, title="平台名称"),
+            session_id: str | None = Body(None, title="会话ID"),
+            platform_name: str | None = Body(None, title="平台名称"),
             params: Paging = Depends()
     ):
         super().__init__(params)

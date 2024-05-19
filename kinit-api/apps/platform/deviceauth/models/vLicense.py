@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 
 class VLicense(BaseModel):
-    __tablename__ = "platform_license_vlicense"
+    __tablename__ = "vadmin_deviceauth_vlicense"
     __table_args__ = ({'comment': 'license表'})
 
     device_id: Mapped[str] = mapped_column(String(255), comment="设备id")

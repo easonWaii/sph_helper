@@ -4,9 +4,7 @@ from typing import Any, Dict
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.crud import DalBase
 from . import models, schemas
-from . import params
 from .utils.auth_license import decode_license
-import ctypes
 
 
 class VLicenseDal(DalBase):

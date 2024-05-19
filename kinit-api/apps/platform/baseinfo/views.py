@@ -12,10 +12,12 @@ from .params.platform_account import PlatformAccountParams
 from .params.video_info import VideoInfoParams
 from starlette import status
 
+from .schemas import PlatformCookie,VideoInfo
+
 app = APIRouter()
 
 @app.post("/platform/baseinfo", summary="获取cookie相关的基本信息")
-async def get_base_info(data: BaseInfoParams, auth: Auth = Depends(FullAdminAuth()),
+async def get_base_info(data: PlatformCookie, auth: Auth = Depends(FullAdminAuth()),
                         platform_client: any = Depends(platform_factory_getter)):
     if isinstance(platform_client, AbstractClient):
         res_data = await platform_client.set_init(data.session_id, auth.db)
@@ -27,7 +29,7 @@ async def get_base_info(data: BaseInfoParams, auth: Auth = Depends(FullAdminAuth
 
 
 @app.post("/platform/videoinfos", summary="获取平台账号相关的视频列表")
-async def get_video_infos(data: VideoInfoParams, auth: Auth = Depends(FullAdminAuth()),
+async def get_video_infos(data: VideoInfoParams = Depends(), auth: Auth = Depends(FullAdminAuth()),
                           platform_client: any = Depends(platform_factory_getter)):
     if isinstance(platform_client, AbstractClient):
         data_list, count = await platform_client.get_video_list(data.limit, data.page, data.start_time, data.end_time)
@@ -37,7 +39,7 @@ async def get_video_infos(data: VideoInfoParams, auth: Auth = Depends(FullAdminA
 
 
 @app.post("/platform/overthresholdvideo", summary="获取平台视频作品超阈值数的列表")
-async def get_video_over_threshold(data: OverThresholdParams, auth: Auth = Depends(FullAdminAuth()),
+async def get_video_over_threshold(data: OverThresholdParams = Depends(), auth: Auth = Depends(FullAdminAuth()),
                           platform_client: any = Depends(platform_factory_getter)):
     if isinstance(platform_client, AbstractClient):
         data_list, count = await platform_client.get_over_threshold_list(data.keywords, data.start_time, data.end_time)
@@ -52,7 +54,7 @@ async def get_accounts(params: PlatformAccountParams = Depends(), auth: Auth = D
 
 
 @app.post("/platform/account", summary="登陆态验证")
-async def check_status_info(data: BaseInfoParams, auth: Auth = Depends(FullAdminAuth()),
+async def check_status_info(data: BaseInfoParams = Depends(), auth: Auth = Depends(FullAdminAuth()),
                             platform_client: any = Depends(platform_factory_getter)):
     if isinstance(platform_client, AbstractClient):
         res_data = await platform_client.pong(data.session_id)

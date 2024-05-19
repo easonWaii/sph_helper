@@ -1,1 +1,2 @@
 from .platform_cookie import PlatformCookie, CookieInfoPlatformCookieSimpleOut
+from .video_info import VideoInfo,VideoInfoSimpleOut

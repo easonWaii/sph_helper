@@ -1,7 +1,9 @@
 import ctypes
+import os
 
-# 加载共享库
-lib = ctypes.CDLL('./liblicense.so')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# 加载so库
+lib = ctypes.CDLL(os.path.join(current_dir, 'liblicense.so'))
 
 
 def decode_license(device_id, license_key):
